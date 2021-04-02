@@ -1,5 +1,11 @@
 <?php
 if (!function_exists('array_merge_deep')) {
+
+    /**
+     * @param array $a
+     * @param array $b
+     * @return mixed
+     */
     function array_merge_deep($a, $b)
     {
         $args = func_get_args();
