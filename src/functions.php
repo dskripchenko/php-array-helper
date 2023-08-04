@@ -72,23 +72,25 @@ if (!function_exists('array_get_signature')) {
      * @param string|null $secret
      * @param string|null $salt
      * @param callable|null $hashing
+     * @param int $flags
+     *
      * @return string
      */
     function array_get_signature(
         array $array,
         string $secret = null,
         string $salt = null,
-        callable $hashing = null
+        callable $hashing = null,
+        int $flags = JSON_UNESCAPED_UNICODE
+            | JSON_UNESCAPED_SLASHES
+            | JSON_NUMERIC_CHECK
     ): string {
         $hashing = $hashing ?: static function(string $str) {
             return md5($str);
         };
 
         $array = array_sort_deep($array);
-        $raw = json_encode(
-            $array,
-            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK
-        );
+        $raw = json_encode($array, $flags);
 
         $rawString = "{$secret}{$raw}{$salt}";
         return $hashing($rawString);
