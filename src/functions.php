@@ -78,9 +78,9 @@ if (!function_exists('array_get_signature')) {
      */
     function array_get_signature(
         array $array,
-        string $secret = null,
-        string $salt = null,
-        callable $hashing = null,
+        ? string $secret = null,
+        ? string $salt = null,
+        ? callable $hashing = null,
         int $flags = JSON_UNESCAPED_UNICODE
             | JSON_UNESCAPED_SLASHES
             | JSON_NUMERIC_CHECK
